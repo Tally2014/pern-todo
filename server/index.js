@@ -7,6 +7,18 @@ const pool = require("./db");
 app.use(cors());
 app.use(express.json());
 
+//ROUTES//
+
+//create a todo
+
+//get all todos
+
+//get a todo
+
+//update a todo
+
+//delete a todo
+
 app.listen(5100, () => {
   console.log("Sever started on Port: 5100");
 });
