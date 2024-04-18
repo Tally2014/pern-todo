@@ -24,7 +24,7 @@ export default function InputTodo() {
       <form className="flex justify-center mt-5" onSubmit={onSbumitForm}>
         <input
           type="text"
-          class=" w-[50%] rounded-md border-2 mx-1 border-gray-200 bg-white text-sm text-gray-700 shadow-sm focus:outline-green-200"
+          class="px-2 w-[50%] rounded-md border-2 mx-1 border-gray-200 bg-white text-sm text-gray-700 shadow-sm focus:outline-green-200"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />

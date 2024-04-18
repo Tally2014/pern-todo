@@ -6,7 +6,7 @@ import ListTodo from "./components/ListTodo";
 function App() {
   return (
     <>
-      <div className="container">
+      <div className="items-center">
         <InputTodo />
         <ListTodo />
       </div>
