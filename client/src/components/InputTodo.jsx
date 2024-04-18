@@ -1,6 +1,9 @@
-import React from "react";
+import { useState } from "react";
 
 export default function InputTodo() {
+  const [description, setDescription] = useState("");
+  console.log(description);
+
   return (
     <>
       <h1 className="text-3xl text-center mt-5">Pern Todo List</h1>
@@ -8,6 +11,8 @@ export default function InputTodo() {
         <input
           type="text"
           class=" w-[50%] rounded-md border-2 mx-1 border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
 
         <button
