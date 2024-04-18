@@ -17,7 +17,6 @@ export default function ListTodo() {
     getTodos();
   }, []);
 
-  console.log(todos);
   return (
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 mx-10">
       <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -27,10 +26,7 @@ export default function ListTodo() {
               Description
             </th>
             <th scope="col" class="px-6 py-3">
-              <span class="sr-only">Edit</span>
-            </th>
-            <th scope="col" class="px-6 py-3">
-              <span class="sr-only">Delete</span>
+              <span class="sr-only">Actions</span>
             </th>
           </tr>
         </thead>
@@ -46,12 +42,10 @@ export default function ListTodo() {
               <td class="px-6 py-4 text-right">
                 <a
                   href="#"
-                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-10"
                 >
                   Edit
                 </a>
-              </td>
-              <td class="px-6 py-4 text-right">
                 <a
                   href="#"
                   class="font-medium text-red-600 dark:text-red-500 hover:underline"
