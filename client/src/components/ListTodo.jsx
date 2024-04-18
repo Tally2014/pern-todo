@@ -1,6 +1,23 @@
-import React from "react";
+import { useState, useEffect } from "react";
 
 export default function ListTodo() {
+  const [todos, setTodos] = useState([]);
+  const getTodos = async () => {
+    try {
+      const response = await fetch("http://localhost:5100/todos");
+      const jsonData = await response.json();
+
+      setTodos(jsonData);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    getTodos();
+  }, []);
+
+  console.log(todos);
   return (
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 mx-10">
       <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
