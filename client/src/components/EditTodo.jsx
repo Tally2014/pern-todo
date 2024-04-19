@@ -1,6 +1,38 @@
 import { useState } from "react";
 
-export default function EditTodo({ closeModal }) {
+export default function EditTodo({ todo, closeModal, refreshTodos }) {
+  const [updatedDescription, setUpdatedDescription] = useState(
+    todo.description
+  );
+
+  const handleDescriptionChange = (e) => {
+    setUpdatedDescription(e.target.value);
+  };
+
+  const handleUpdateTodo = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:5100/todos/${todo.todo_id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ description: updatedDescription }),
+        }
+      );
+
+      if (response.ok) {
+        closeModal();
+        refreshTodos();
+      } else {
+        console.error("Failed to update todo");
+      }
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -20,13 +52,18 @@ export default function EditTodo({ closeModal }) {
                   <input
                     type="text"
                     className="p-2 w-full border-2 border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 dark:bg-gray-800 dark:text-white dark:border-gray-700 dark:focus:ring-blue-700 dark:focus:border-blue-700"
+                    value={updatedDescription}
+                    onChange={handleDescriptionChange}
                   />
                 </div>
               </div>
             </div>
           </div>
           <div className="bg-gray-50 dark:bg-gray-800 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-            <button className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
+            <button
+              onClick={handleUpdateTodo}
+              className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+            >
               Update
             </button>
             <button

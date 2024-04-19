@@ -4,6 +4,7 @@ import EditTodo from "./EditTodo";
 export default function ListTodo({ refresh }) {
   const [todos, setTodos] = useState([]);
   const [isEditing, setIsEditing] = useState(false); // To control the visibility of the modal
+  const [selectedTodo, setSelectedTodo] = useState(null); // To store the selected todo for editing
 
   const getTodos = async () => {
     try {
@@ -30,6 +31,7 @@ export default function ListTodo({ refresh }) {
 
   const handleEditClick = (todo) => {
     setIsEditing(true);
+    setSelectedTodo(todo);
   };
 
   useEffect(() => {
@@ -78,7 +80,13 @@ export default function ListTodo({ refresh }) {
           ))}
         </tbody>
       </table>
-      {isEditing && <EditTodo closeModal={() => setIsEditing(false)} />}
+      {isEditing && (
+        <EditTodo
+          closeModal={() => setIsEditing(false)}
+          todo={selectedTodo}
+          refreshTodos={getTodos}
+        />
+      )}
     </div>
   );
 }
