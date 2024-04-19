@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function ListTodo() {
+export default function ListTodo({ refresh }) {
   const [todos, setTodos] = useState([]);
   const getTodos = async () => {
     try {
@@ -27,7 +27,7 @@ export default function ListTodo() {
 
   useEffect(() => {
     getTodos();
-  }, []);
+  }, [refresh]);
 
   return (
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5 mx-10">

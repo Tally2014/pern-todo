@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function InputTodo() {
+export default function InputTodo({ refresh, setRefresh }) {
   const [description, setDescription] = useState("");
 
   const onSbumitForm = async (e) => {
@@ -12,7 +12,9 @@ export default function InputTodo() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      console.log(response);
+      setDescription("");
+      setRefresh(!refresh);
+      //console.log(response);
     } catch (error) {
       console.log(error.message);
     }
