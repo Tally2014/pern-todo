@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
+import EditTodo from "./EditTodo";
 
 export default function ListTodo({ refresh }) {
   const [todos, setTodos] = useState([]);
+  const [isEditing, setIsEditing] = useState(false); // To control the visibility of the modal
+
   const getTodos = async () => {
     try {
       const response = await fetch("http://localhost:5100/todos");
@@ -23,6 +26,10 @@ export default function ListTodo({ refresh }) {
     } catch (err) {
       console.error(err.message);
     }
+  };
+
+  const handleEditClick = (todo) => {
+    setIsEditing(true);
   };
 
   useEffect(() => {
@@ -55,6 +62,7 @@ export default function ListTodo({ refresh }) {
                 <a
                   href="#"
                   class="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-10"
+                  onClick={() => handleEditClick(todo)}
                 >
                   Edit
                 </a>
@@ -70,6 +78,7 @@ export default function ListTodo({ refresh }) {
           ))}
         </tbody>
       </table>
+      {isEditing && <EditTodo closeModal={() => setIsEditing(false)} />}
     </div>
   );
 }
